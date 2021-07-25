@@ -1,3 +1,38 @@
 .app {
    display: flex;
 }
+
+.sidebar {
+   width: 240px;
+
+   border-right: 2px solid #b0b0b0;
+   background-color: #f2f0f0;
+
+   nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+   }
+}
+
+.main-logo {
+   display: flex;
+   justify-content: center;
+}
+
+.menu-container {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+}
+
+.nav-button {
+   background-color: #5c5454;
+   padding: 1rem;
+   margin-bottom: 1rem;
+
+   a {
+      color: #fff;
+      text-decoration: none;
+   }
+}
