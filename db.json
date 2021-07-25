@@ -1,5 +1,41 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "name": "user1",
+      "password": "asdf123"
+    },
+    {
+      "id": 2,
+      "name": "user2",
+      "password": "asdf123"
+    },
+    {
+      "name": "Novo",
+      "password": "fdsa321",
+      "id": 3
+    },
+    {
+      "name": "Novo",
+      "password": "fdsa321",
+      "id": 4
+    },
+    {
+      "name": "Novo",
+      "password": "fdsa321",
+      "id": 6
+    }
+  ],
   "cars": [
-    { "id": 1, "modelo": "chevrolet", "marca": "chevrolet" }
+    {
+      "id": 1,
+      "modelo": "astra",
+      "marca": "chevrolet"
+    },
+    {
+      "id": 2,
+      "modelo": "fusca",
+      "marca": "vw"
+    }
   ]
 }
