@@ -4,6 +4,7 @@ import { Dashboard } from './pages/Dashboard';
 import { Home } from './pages/Home';
 import { Users } from './pages/Users';
 import { Cars } from './pages/Cars';
+import { Clients } from './pages/Clients';
 
 const pages = [
   {
@@ -17,6 +18,10 @@ const pages = [
   {
     name: 'Carros',
     address: '/cars',    
+  },
+  {
+    name: 'Clientes',
+    address: '/clients',    
   },
 ]
 
@@ -58,6 +63,9 @@ export default function AppRouter() {
             </Route>
             <Route path="/cars">
               <Cars />
+            </Route>
+            <Route path="/clients">
+              <Clients />
             </Route>
           </Switch>
         </Route>

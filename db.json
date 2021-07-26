@@ -3,19 +3,19 @@
     {
       "name": "User 1",
       "email": "user1@email.com",
-      "cpf": "312.321.321-21",
-      "birth": "2021-07-16",
-      "permission": "admin",
+      "cpf": "433.123.324-42",
+      "birth": "2021-07-09",
+      "permission": "Administrador",
       "password": "asdf123",
       "id": 1
     },
     {
       "name": "User 2",
       "email": "user2@email.com",
-      "cpf": "321.123.432-42",
-      "birth": "2021-07-30",
-      "permission": "admin",
-      "password": "fdas3321",
+      "cpf": "233.123.322-22",
+      "birth": "2021-07-07",
+      "permission": "Funcionário",
+      "password": "asdf123",
       "id": 2
     }
   ],
@@ -27,8 +27,6 @@
       "docNumber": "34289473298431",
       "licensePlate": "JOE-2323",
       "category": "Sedan",
-      "rentPrice": "200",
-      "client": "Silvio Santos",
       "id": 1
     },
     {
@@ -38,9 +36,30 @@
       "docNumber": "23414738272",
       "licensePlate": "ECO-2332",
       "category": "Esportivo",
-      "rentPrice": "290",
-      "client": "Faustão",
       "id": 2
+    },
+    {
+      "name": "Palio",
+      "brand": "Fiat",
+      "year": "2003",
+      "docNumber": "1343245543562",
+      "licensePlate": "ZZZ-1234",
+      "category": "Sedex",
+      "id": 3
+    }
+  ],
+  "car-category": [
+    {
+      "id": 1,
+      "name": "Sedan"
+    },
+    {
+      "id": 2,
+      "name": "Sedex"
+    },
+    {
+      "id": 3,
+      "name": "Sport"
     }
   ]
 }

@@ -20,7 +20,7 @@ interface UserProps {
   password: string;
 }
 
-export function Users() {
+export function Clients() {
   const [users, setUsers] = useState<UserProps[]>([]);
   const [user, setUser] = useState<UserProps>();
   const [modalCreateIsOpen, setModalCreateIsOpen] = useState(false);
@@ -185,18 +185,10 @@ export function Users() {
             />          
 
             <p>Permissão:</p>      
-            <select 
-              onChange={e => {
-                if(e.target.value.length > 1) {
-                  setUserPermission(e.target.value);
-                } else {
-                  setUserPermission("Administrador");
-                }              
-              }}
-            >
-              <option>Administrador</option>
-              <option>Funcionário</option>
-            </select>  
+            <input 
+              type="text"
+              onChange={e => setUserPermission(e.target.value)}
+            />         
 
             <p>Data de nascimento:</p>
             <input 
@@ -250,19 +242,11 @@ export function Users() {
             />          
 
             <p>Permissão:</p>      
-            <select 
+            <input 
+              type="text"
               value={userPermission}
-              onChange={e => {
-                if(e.target.value.length > 1) {
-                  setUserPermission(e.target.value);
-                } else {
-                  setUserPermission("Administrador");
-                }              
-              }}
-            >
-              <option>Administrador</option>
-              <option>Funcionário</option>
-            </select>        
+              onChange={e => setUserPermission(e.target.value)}
+            />         
 
             <p>Data de nascimento:</p>
             <input 
@@ -300,8 +284,7 @@ export function Users() {
               <th>Usuário</th>              
               <th>Email</th>              
               <th>CPF</th>              
-              <th>Permissão</th>   
-              <th>Ações</th>                              
+              <th>Permissão</th>              
             </tr>
           </thead>
           <tbody>

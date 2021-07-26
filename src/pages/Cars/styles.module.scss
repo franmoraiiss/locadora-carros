@@ -11,7 +11,7 @@
    padding: 1rem 0;
 }
 
-.addUser {
+.addCar {
    padding: 0.33rem 1rem;
    background: #4fc3a1;
    color: #fff;
@@ -19,7 +19,7 @@
    border-radius: 0.4rem;
 }
 
-.users {
+.cars {
    border-radius: 5px;
    font-size: 12px;
    font-weight: normal;
@@ -64,7 +64,8 @@
    form {
       align-items: center;
 
-      input {
+      input,
+      select {
          width: 500px;
          height: 2rem;
          margin-bottom: 1rem;

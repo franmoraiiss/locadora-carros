@@ -21,8 +21,12 @@ interface CarProps {
   chassi: string;
   licensePlate: string;
   category: string;
-  rentPrice: string;
   client: string;
+}
+
+interface CategoryProps {
+  id?: number;
+  name: string;
 }
 
 export function Cars() {
@@ -37,11 +41,10 @@ export function Cars() {
   const [carYear, setCarYear] = useState('');   
   const [carDocNumber, setCarDocNumber] = useState('');   
   const [carLicensePlate, setCarLicensePlate] = useState('');   
-  const [carCategory, setCarCategory] = useState('');   
-  const [carRentPrice, setCarRentPrice] = useState('');   
-  const [carClient, setCarClient] = useState('');   
-
+  const [carCategory, setCarCategory] = useState("Sedan");     
   const [carBrand, setCarBrand] = useState('');   
+
+  const [carCategorys, setCarCategorys] = useState<CategoryProps[]>([]);
 
   function openModalCreate() {
     setModalCreateIsOpen(true);
@@ -62,26 +65,39 @@ export function Cars() {
     setCarModel('');
     setCarBrand('');
     setCarYear('');  
-    setCarCategory('');
-    setCarClient('');
+    setCarCategory("Sedan");
     setCarDocNumber('');    
-    setCarLicensePlate('');
-    setCarRentPrice('');
+    setCarLicensePlate('');    
   }
 
-  function getCars() {
-    api.get("/cars").then((response) => setCars(response.data));
+  async function getCars() {
+    await api.get("/cars").then((response) => setCars(response.data));
   }  
+
+  async function getCarCategorys() {
+    await api.get("/car-category").then((response) => setCarCategorys(response.data));
+  }
 
   useEffect(() => {
     getCars();    
+    getCarCategorys();        
   }, []);
 
   async function CreateCar(event: React.FormEvent) {
     event.preventDefault();
     closeModalCreate();
+
+    console.log(carModel)
+    console.log(carBrand)
+    console.log(carYear)
+      
+    console.log(carDocNumber)
+    console.log(carBrand)
+    console.log(carCategory)    
+
+
     
-    if(carModel && carBrand) {
+    if(carModel && carBrand && carYear && carDocNumber && carLicensePlate && carCategory) {
       await api.post("/cars", {      
         name: carModel,
         brand: carBrand,
@@ -89,8 +105,6 @@ export function Cars() {
         docNumber: carDocNumber,
         licensePlate: carLicensePlate,
         category: carCategory,
-        rentPrice: carRentPrice,
-        client: carClient
       });
     } else {
       alert("Preencha os campos corretamente!");           
@@ -100,11 +114,9 @@ export function Cars() {
     setCarModel('');
     setCarBrand('');
     setCarYear('');  
-    setCarCategory('');
-    setCarClient('');
+    setCarCategory("Sedan");
     setCarDocNumber('');    
-    setCarLicensePlate('');
-    setCarRentPrice('');
+    setCarLicensePlate('');    
     
     getCars();
   }
@@ -113,7 +125,7 @@ export function Cars() {
     event.preventDefault();
     closeModalEdit();
     
-    if(carModel && carBrand) {
+    if(carModel && carBrand && carYear && carDocNumber && carLicensePlate && carCategory) {
       await api.put(`/cars/${carID}`, {             
         name: carModel,
         brand: carBrand,
@@ -121,8 +133,6 @@ export function Cars() {
         docNumber: carDocNumber,
         licensePlate: carLicensePlate,
         category: carCategory,
-        rentPrice: carRentPrice,
-        client: carClient      
       });
     } else {
       alert("Preencha os campos corretamente!");           
@@ -132,11 +142,9 @@ export function Cars() {
     setCarModel('');
     setCarBrand('');
     setCarYear('');  
-    setCarCategory('');
-    setCarClient('');
+    setCarCategory("Sedan");
     setCarDocNumber('');    
-    setCarLicensePlate('');
-    setCarRentPrice('');
+    setCarLicensePlate('');    
     
     getCars();
   }
@@ -167,10 +175,8 @@ export function Cars() {
 
       setCarYear(car.year);  
       setCarCategory(car.category);
-      setCarClient(car.client);
       setCarDocNumber(car.docNumber);    
-      setCarLicensePlate(car.licensePlate);
-      setCarRentPrice(car.rentPrice);
+      setCarLicensePlate(car.licensePlate);      
     }    
   }, [car]);  
 
@@ -180,13 +186,13 @@ export function Cars() {
       <Divider />
 
       <Modal
-        id="createUser"
-        contentLabel="createUser"
+        id="createCar"
+        contentLabel="createCar"
         isOpen={modalCreateIsOpen}        
         onRequestClose={closeModalCreate}   
         ariaHideApp={false}              
       >
-        <h2 style={{ textAlign: 'center' }}>Criar usuário</h2>        
+        <h2 style={{ textAlign: 'center' }}>Cadastrar carro</h2>        
         <div className={styles.modal}>
           <form onSubmit={(e) => CreateCar(e)}>
             <p>Modelo:</p>
@@ -208,16 +214,21 @@ export function Cars() {
             />
 
             <p>Categoria:</p>
-            <input 
-              type="text"
-              onChange={e => setCarCategory(e.target.value)}
-            />
-
-            <p>Cliente:</p>
-            <input 
-              type="text"
-              onChange={e => setCarClient(e.target.value)}
-            />
+            <select 
+              onChange={e => {
+                if(e.target.value.length > 1) {
+                  setCarCategory(e.target.value);
+                } else {
+                  setCarCategory("Sedan");
+                }              
+              }}
+            >
+              {carCategorys.map((category, index) => {                
+                return (
+                  <option key={index}>{category.name}</option>
+                );
+              })}
+            </select>
 
             <p>Número do documento do carro:</p>
             <input 
@@ -231,12 +242,6 @@ export function Cars() {
               onChange={e => setCarLicensePlate(e.target.value)}
             />
 
-            <p>Preço do Aluguel:</p>
-            <input 
-              type="text"
-              onChange={e => setCarRentPrice(e.target.value)}
-            />
-
             <div className={styles.formActionButton}>
               <button onClick={closeModalCreate}>Fechar</button>
               <button type="submit" onClick={CreateCar}>Criar</button>              
@@ -246,8 +251,8 @@ export function Cars() {
       </Modal>
 
       <Modal
-        id="editUser"
-        contentLabel="editUser"
+        id="editCar"
+        contentLabel="editCar"
         isOpen={modalEditIsOpen}        
         onRequestClose={closeModalEdit}                 
         ariaHideApp={false}
@@ -277,19 +282,14 @@ export function Cars() {
               onChange={e => setCarYear(e.target.value)}
             />
 
-            <p>Category:</p>
-            <input 
-              type="text"
-              value={carCategory}
-              onChange={e => setCarCategory(e.target.value)}
-            />
-
-            <p>Cliente:</p>
-            <input 
-              type="text"
-              value={carClient}
-              onChange={e => setCarClient(e.target.value)}
-            />
+            <p>Categoria:</p>
+            <select value={carCategory} onChange={e => setCarCategory(e.target.value)}>
+              {carCategorys.map((category, index) => {
+                return (
+                  <option key={index}>{category.name}</option>
+                );
+              })}
+            </select>
 
             <p>Número do documento do carro:</p>
             <input 
@@ -305,13 +305,6 @@ export function Cars() {
               onChange={e => setCarLicensePlate(e.target.value)}
             />
 
-            <p>Preço do Aluguel:</p>
-            <input 
-              type="text"
-              value={carRentPrice}
-              onChange={e => (e.target.value)}
-            />
-
             <div className={styles.formActionButton}>
               <button onClick={closeModalEdit}>Fechar</button>
               <button type="submit" onClick={EditCar}>Criar</button>              
@@ -322,19 +315,19 @@ export function Cars() {
 
       <div>
         <div className={styles.header}>
-          <button className={styles.addUser} onClick={openModalCreate}>
+          <button className={styles.addCar} onClick={openModalCreate}>
             Adicionar carro
           </button>
         </div>
-        <table className={styles.users}>
+        <table className={styles.cars}>
           <thead>
             <tr>
               <th>ID</th>
               <th>Modelo</th>              
               <th>Marca</th>                                    
-              <th>Categoria</th>                                    
-              <th>Cliente</th>                                    
-              <th>Placa</th>                                    
+              <th>Categoria</th>                                                                      
+              <th>Placa</th>      
+              <th>Ações</th>                              
             </tr>
           </thead>
           <tbody>
@@ -345,7 +338,6 @@ export function Cars() {
                   <td>{car.name}</td>
                   <td>{car.brand}</td>    
                   <td>{car.category}</td>    
-                  <td>{car.client}</td>    
                   <td>{car.licensePlate}</td>    
                   <td style={{ width: '150px' }}>                     
                     <button className={styles.tableActionButton} onClick={() => HandleEditCar(car.id)}>
