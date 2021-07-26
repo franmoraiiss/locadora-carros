@@ -1,53 +1,46 @@
 {
   "users": [
     {
-      "name": "user2",
-      "email": "user2@email.com",
-      "cpf": "12332132111",
+      "name": "User 1",
+      "email": "user1@email.com",
+      "cpf": "312.321.321-21",
+      "birth": "2021-07-16",
       "permission": "admin",
-      "password": "123asd",
-      "id": 3
+      "password": "asdf123",
+      "id": 1
     },
     {
-      "name": "novo",
-      "email": "novo@email.com",
-      "cpf": "123423334",
-      "permission": "sdafaoeo",
-      "password": "asdf",
-      "id": 4
-    },
-    {
-      "name": "usereditei",
+      "name": "User 2",
       "email": "user2@email.com",
-      "cpf": "12332132111",
+      "cpf": "321.123.432-42",
+      "birth": "2021-07-30",
       "permission": "admin",
-      "password": "123asd",
-      "id": 5
-    },
-    {
-      "name": "user2",
-      "email": "user2@email.com",
-      "cpf": "12332132111",
-      "permission": "admin",
-      "password": "123asd",
-      "id": 6
+      "password": "fdas3321",
+      "id": 2
     }
   ],
   "cars": [
     {
-      "id": 1,
-      "model": "astra",
-      "brand": "chevrolet"
+      "name": "Novo Astra",
+      "brand": "Chevrolet",
+      "year": "2000",
+      "docNumber": "34289473298431",
+      "licensePlate": "JOE-2323",
+      "category": "Sedan",
+      "rentPrice": "200",
+      "client": "Silvio Santos",
+      "id": 1
     },
     {
-      "id": 2,
-      "model": "fusca",
-      "brand": "vw"
-    },
-    {
-      "model": "celta",
-      "brand": "chevrolet",
-      "id": 3
+      "name": "Ecosport",
+      "brand": "Ford",
+      "year": "2005",
+      "docNumber": "23414738272",
+      "licensePlate": "ECO-2332",
+      "category": "Esportivo",
+      "rentPrice": "290",
+      "client": "Faustão",
+      "id": 2
     }
   ]
 }

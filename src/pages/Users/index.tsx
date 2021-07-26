@@ -13,10 +13,11 @@ import styles from './styles.module.scss';
 interface UserProps {
   id?: number;
   name: string;
-  password: string;
-  email: string;
   cpf: string;
+  birth: string;
+  email: string;
   permission: string;
+  password: string;
 }
 
 export function Users() {
@@ -30,6 +31,7 @@ export function Users() {
   const [userEmail, setUserEmail] = useState('');
   const [userCPF, setUserCPF] = useState('');
   const [userPermission, setUserPermission] = useState('');
+  const [userBirth, setUserBirth] = useState('');
   const [userPassword, setUserPassword] = useState('');
 
   function openModalCreate() {
@@ -49,6 +51,7 @@ export function Users() {
     setUserID(0);
     setUserName('');
     setUserEmail('');
+    setUserBirth('');
     setUserCPF('');
     setUserPermission('');
     setUserPassword(''); 
@@ -66,12 +69,13 @@ export function Users() {
     event.preventDefault();
     closeModalCreate();
     
-    if(userName && userEmail && userCPF && userPermission && userPassword) {
+    if(userName && userEmail && userCPF && userPermission && userPassword && userBirth) {
       await api.post("/users", {      
         name: userName, 
         email: userEmail,
         cpf: userCPF,
-        permission: userPermission,
+        birth: userBirth,
+        permission: userPermission,        
         password: userPassword,      
       });
     } else {
@@ -81,6 +85,7 @@ export function Users() {
     setUserID(0);
     setUserName('');
     setUserEmail('');
+    setUserBirth('');
     setUserCPF('');
     setUserPermission('');
     setUserPassword('');  
@@ -92,11 +97,12 @@ export function Users() {
     event.preventDefault();
     closeModalEdit();
     
-    if(userName && userEmail && userCPF && userPermission && userPassword) {
-      await api.put(`/users/${userID}`, {             
+    if(userName && userEmail && userCPF && userPermission && userPassword && userBirth) {
+      await api.patch(`/users/${userID}`, {             
         name: userName, 
         email: userEmail,
         cpf: userCPF,
+        birth: userBirth,
         permission: userPermission,
         password: userPassword,      
       });
@@ -107,6 +113,7 @@ export function Users() {
     setUserID(0);
     setUserName('');
     setUserEmail('');
+    setUserBirth('');
     setUserCPF('');
     setUserPermission('');
     setUserPassword('');  
@@ -137,6 +144,7 @@ export function Users() {
       setUserID(user.id);
       setUserName(user.name);
       setUserEmail(user.email);
+      setUserBirth(user.birth);
       setUserCPF(user.cpf);
       setUserPermission(user.permission);
       setUserPassword(user.password);  
@@ -172,7 +180,7 @@ export function Users() {
 
             <p>CPF:</p>      
             <input 
-              type="text"
+              type="text"             
               onChange={e => setUserCPF(e.target.value)}
             />          
 
@@ -181,6 +189,12 @@ export function Users() {
               type="text"
               onChange={e => setUserPermission(e.target.value)}
             />         
+
+            <p>Data de nascimento:</p>
+            <input 
+              type="date"            
+              onChange={(e) => setUserBirth(e.target.value)} 
+            />
 
             <p>Senha:</p>      
             <input 
@@ -203,7 +217,7 @@ export function Users() {
         onRequestClose={closeModalEdit}                 
         ariaHideApp={false}
       >
-        <h2 style={{ textAlign: 'center' }}>Criar usuário</h2>        
+        <h2 style={{ textAlign: 'center' }}>Editar usuário</h2>        
         <div className={styles.modal}>
           <form onSubmit={(e) => EditUser(e)}>
             <p>Nome:</p>
@@ -234,6 +248,13 @@ export function Users() {
               onChange={e => setUserPermission(e.target.value)}
             />         
 
+            <p>Data de nascimento:</p>
+            <input 
+              type="date"    
+              value={userBirth}        
+              onChange={(e) => setUserBirth(e.target.value)} 
+            />
+
             <p>Senha:</p>      
             <input 
               type="password"
@@ -244,7 +265,7 @@ export function Users() {
 
             <div className={styles.formActionButton}>
               <button onClick={closeModalEdit}>Fechar</button>
-              <button type="submit" onClick={EditUser}>Criar</button>              
+              <button type="submit" onClick={EditUser}>Atualizar</button>              
             </div>
           </form>
         </div>

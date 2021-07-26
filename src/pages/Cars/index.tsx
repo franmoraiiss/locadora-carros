@@ -13,8 +13,16 @@ import styles from './styles.module.scss';
 
 interface CarProps {
   id?: number;
-  model: string;
+  name: string;
   brand: string;
+
+  year: string;
+  docNumber: string;
+  chassi: string;
+  licensePlate: string;
+  category: string;
+  rentPrice: string;
+  client: string;
 }
 
 export function Cars() {
@@ -26,6 +34,13 @@ export function Cars() {
 
   const [carID, setCarID] = useState<number>();
   const [carModel, setCarModel] = useState('');   
+  const [carYear, setCarYear] = useState('');   
+  const [carDocNumber, setCarDocNumber] = useState('');   
+  const [carLicensePlate, setCarLicensePlate] = useState('');   
+  const [carCategory, setCarCategory] = useState('');   
+  const [carRentPrice, setCarRentPrice] = useState('');   
+  const [carClient, setCarClient] = useState('');   
+
   const [carBrand, setCarBrand] = useState('');   
 
   function openModalCreate() {
@@ -42,9 +57,16 @@ export function Cars() {
 
   function closeModalEdit() {
     setModalEditIsOpen(false);
+    
     setCarID(0);
     setCarModel('');
     setCarBrand('');
+    setCarYear('');  
+    setCarCategory('');
+    setCarClient('');
+    setCarDocNumber('');    
+    setCarLicensePlate('');
+    setCarRentPrice('');
   }
 
   function getCars() {
@@ -61,8 +83,14 @@ export function Cars() {
     
     if(carModel && carBrand) {
       await api.post("/cars", {      
-        model: carModel,
-        brand: carBrand   
+        name: carModel,
+        brand: carBrand,
+        year: carYear,
+        docNumber: carDocNumber,
+        licensePlate: carLicensePlate,
+        category: carCategory,
+        rentPrice: carRentPrice,
+        client: carClient
       });
     } else {
       alert("Preencha os campos corretamente!");           
@@ -71,6 +99,12 @@ export function Cars() {
     setCarID(0);
     setCarModel('');
     setCarBrand('');
+    setCarYear('');  
+    setCarCategory('');
+    setCarClient('');
+    setCarDocNumber('');    
+    setCarLicensePlate('');
+    setCarRentPrice('');
     
     getCars();
   }
@@ -81,8 +115,14 @@ export function Cars() {
     
     if(carModel && carBrand) {
       await api.put(`/cars/${carID}`, {             
-        model: carModel,
-        brand: carBrand       
+        name: carModel,
+        brand: carBrand,
+        year: carYear,
+        docNumber: carDocNumber,
+        licensePlate: carLicensePlate,
+        category: carCategory,
+        rentPrice: carRentPrice,
+        client: carClient      
       });
     } else {
       alert("Preencha os campos corretamente!");           
@@ -91,6 +131,12 @@ export function Cars() {
     setCarID(0);
     setCarModel('');
     setCarBrand('');
+    setCarYear('');  
+    setCarCategory('');
+    setCarClient('');
+    setCarDocNumber('');    
+    setCarLicensePlate('');
+    setCarRentPrice('');
     
     getCars();
   }
@@ -116,8 +162,15 @@ export function Cars() {
   useEffect(() => {
     if(car) { 
       setCarID(car.id);
-      setCarModel(car.model);
+      setCarModel(car.name);
       setCarBrand(car.brand);
+
+      setCarYear(car.year);  
+      setCarCategory(car.category);
+      setCarClient(car.client);
+      setCarDocNumber(car.docNumber);    
+      setCarLicensePlate(car.licensePlate);
+      setCarRentPrice(car.rentPrice);
     }    
   }, [car]);  
 
@@ -146,6 +199,42 @@ export function Cars() {
             <input 
               type="email"
               onChange={e => setCarBrand(e.target.value)}
+            />
+            
+            <p>Ano:</p>
+            <input 
+              type="text"
+              onChange={e => setCarYear(e.target.value)}
+            />
+
+            <p>Categoria:</p>
+            <input 
+              type="text"
+              onChange={e => setCarCategory(e.target.value)}
+            />
+
+            <p>Cliente:</p>
+            <input 
+              type="text"
+              onChange={e => setCarClient(e.target.value)}
+            />
+
+            <p>Número do documento do carro:</p>
+            <input 
+              type="text"
+              onChange={e => setCarDocNumber(e.target.value)}
+            />
+
+            <p>Placa do carro:</p>
+            <input 
+              type="text"
+              onChange={e => setCarLicensePlate(e.target.value)}
+            />
+
+            <p>Preço do Aluguel:</p>
+            <input 
+              type="text"
+              onChange={e => setCarRentPrice(e.target.value)}
             />
 
             <div className={styles.formActionButton}>
@@ -180,6 +269,49 @@ export function Cars() {
               onChange={e => setCarBrand(e.target.value)}
             />
 
+             
+            <p>Ano:</p>
+            <input 
+              type="text"
+              value={carYear}
+              onChange={e => setCarYear(e.target.value)}
+            />
+
+            <p>Category:</p>
+            <input 
+              type="text"
+              value={carCategory}
+              onChange={e => setCarCategory(e.target.value)}
+            />
+
+            <p>Cliente:</p>
+            <input 
+              type="text"
+              value={carClient}
+              onChange={e => setCarClient(e.target.value)}
+            />
+
+            <p>Número do documento do carro:</p>
+            <input 
+              type="text"
+              value={carDocNumber}
+              onChange={e => setCarDocNumber(e.target.value)}
+            />
+
+            <p>Placa do carro:</p>
+            <input 
+              type="text"
+              value={carLicensePlate}
+              onChange={e => setCarLicensePlate(e.target.value)}
+            />
+
+            <p>Preço do Aluguel:</p>
+            <input 
+              type="text"
+              value={carRentPrice}
+              onChange={e => (e.target.value)}
+            />
+
             <div className={styles.formActionButton}>
               <button onClick={closeModalEdit}>Fechar</button>
               <button type="submit" onClick={EditCar}>Criar</button>              
@@ -200,6 +332,9 @@ export function Cars() {
               <th>ID</th>
               <th>Modelo</th>              
               <th>Marca</th>                                    
+              <th>Categoria</th>                                    
+              <th>Cliente</th>                                    
+              <th>Placa</th>                                    
             </tr>
           </thead>
           <tbody>
@@ -207,8 +342,11 @@ export function Cars() {
               return (
                 <tr key={car.id}>
                   <td>{car.id}</td>
-                  <td>{car.model}</td>
+                  <td>{car.name}</td>
                   <td>{car.brand}</td>    
+                  <td>{car.category}</td>    
+                  <td>{car.client}</td>    
+                  <td>{car.licensePlate}</td>    
                   <td style={{ width: '150px' }}>                     
                     <button className={styles.tableActionButton} onClick={() => HandleEditCar(car.id)}>
                       <EditIcon />
