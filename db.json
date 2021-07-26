@@ -3,27 +3,26 @@
     {
       "id": 1,
       "name": "user1",
-      "password": "asdf123"
+      "email": "user@email.com",
+      "cpf": "09909909909",
+      "permission": "admin",
+      "password": "abc123"
     },
     {
-      "id": 2,
       "name": "user2",
-      "password": "asdf123"
-    },
-    {
-      "name": "Novo",
-      "password": "fdsa321",
+      "email": "user2@email.com",
+      "cpf": "12332132111",
+      "permission": "admin",
+      "password": "123asd",
       "id": 3
     },
     {
-      "name": "Novo",
-      "password": "fdsa321",
+      "name": "user3",
+      "email": "user3@email.com",
+      "cpf": "999999999",
+      "permission": "normal",
+      "password": "asdf123",
       "id": 4
-    },
-    {
-      "name": "Novo",
-      "password": "fdsa321",
-      "id": 6
     }
   ],
   "cars": [
