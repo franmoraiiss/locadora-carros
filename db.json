@@ -1,41 +1,53 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "user1",
-      "password": "asdf123"
-    },
-    {
-      "id": 2,
       "name": "user2",
-      "password": "asdf123"
-    },
-    {
-      "name": "Novo",
-      "password": "fdsa321",
+      "email": "user2@email.com",
+      "cpf": "12332132111",
+      "permission": "admin",
+      "password": "123asd",
       "id": 3
     },
     {
-      "name": "Novo",
-      "password": "fdsa321",
+      "name": "novo",
+      "email": "novo@email.com",
+      "cpf": "123423334",
+      "permission": "sdafaoeo",
+      "password": "asdf",
       "id": 4
     },
     {
-      "name": "Novo",
-      "password": "fdsa321",
+      "name": "usereditei",
+      "email": "user2@email.com",
+      "cpf": "12332132111",
+      "permission": "admin",
+      "password": "123asd",
+      "id": 5
+    },
+    {
+      "name": "user2",
+      "email": "user2@email.com",
+      "cpf": "12332132111",
+      "permission": "admin",
+      "password": "123asd",
       "id": 6
     }
   ],
   "cars": [
     {
       "id": 1,
-      "modelo": "astra",
-      "marca": "chevrolet"
+      "model": "astra",
+      "brand": "chevrolet"
     },
     {
       "id": 2,
-      "modelo": "fusca",
-      "marca": "vw"
+      "model": "fusca",
+      "brand": "vw"
+    },
+    {
+      "model": "celta",
+      "brand": "chevrolet",
+      "id": 3
     }
   ]
 }
