@@ -1,0 +1,120 @@
+.container {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   padding: 2rem 6.5rem;
+}
+
+.header {
+   display: flex;
+   justify-content: flex-end;
+   padding: 1rem 0;
+}
+
+.addCar {
+   padding: 0.33rem 1rem;
+   background: #4fc3a1;
+   color: #fff;
+   border: none;
+   border-radius: 0.4rem;
+}
+
+.cars {
+   border-radius: 5px;
+   font-size: 12px;
+   font-weight: normal;
+   border: none;
+   border-collapse: collapse;
+   width: 100%;
+   max-width: 100%;
+   white-space: nowrap;
+   background-color: white;
+
+   td,
+   th {
+      text-align: center;
+      padding: 8px;
+   }
+
+   td {
+      border-right: 1px solid #f8f8f8;
+      font-size: 12px;
+   }
+
+   thead th {
+      color: #ffffff;
+      background: #4fc3a1;
+   }
+
+   thead th:nth-child(odd) {
+      color: #ffffff;
+      background: #324960;
+   }
+
+   tr:nth-child(even) {
+      background: #f8f8f8;
+   }
+}
+
+.modal {
+   display: flex;
+   justify-content: center;
+   padding: 5rem;
+
+   form {
+      align-items: center;
+
+      input,
+      select {
+         width: 500px;
+         height: 2rem;
+         margin-bottom: 1rem;
+
+         border-radius: 0.2rem;
+         padding: 8px 16px;
+         line-height: 25px;
+         font-size: 14px;
+         font-weight: 500;
+         border: 1px solid #d1d1d1;
+         transition: border 0.3s ease;
+
+         &::placeholder {
+            color: #d1d1d1;
+         }
+
+         &:focus {
+            outline: none;
+            border-color: #000;
+         }
+      }
+
+      .formActionButton {
+         display: flex;
+         justify-content: space-between;
+         margin-top: 2rem;
+
+         button {
+            width: 150px;
+            padding: 0.33rem 1rem;
+            background: #4fc3a1;
+            color: #fff;
+            border: none;
+            border-radius: 0.4rem;
+            transition: opacity 0.3s ease;
+
+            &:hover {
+               opacity: 0.8;
+            }
+         }
+      }
+   }
+}
+
+.tableActionButton {
+   background: none;
+   border: none;
+}
+
+.tableActionButton:last-child {
+   margin-left: 1rem;
+}
