@@ -55,11 +55,41 @@
     },
     {
       "id": 2,
-      "name": "Sedex"
+      "name": "SUV"
     },
     {
       "id": 3,
+      "name": "Hatch"
+    },
+    {
+      "id": 4,
+      "name": "Picape"
+    },
+    {
+      "id": 5,
+      "name": "Minivan"
+    },
+    {
+      "id": 6,
       "name": "Sport"
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "name": "Francisco",
+      "cpf": "233.123.322-22",
+      "cnh": "2324324329898",
+      "birth": "2021-07-07",
+      "phone": "3539329432"
+    },
+    {
+      "name": "Cristian Novo",
+      "cpf": "34893452352489",
+      "birth": "2021-07-23",
+      "cnh": "243237482",
+      "phone": "3599146464646",
+      "id": 2
     }
   ]
 }

@@ -10,29 +10,30 @@ import EditIcon from '@material-ui/icons/Edit';
 import api from '../../services/api';
 
 import styles from './styles.module.scss';
-interface UserProps {
+
+interface ClientProps {
   id?: number;
   name: string;
   cpf: string;
-  birth: string;
-  email: string;
-  permission: string;
-  password: string;
+  cnh: string;  
+  birth: string;  
+  phone: string;
 }
 
 export function Clients() {
-  const [users, setUsers] = useState<UserProps[]>([]);
-  const [user, setUser] = useState<UserProps>();
+  const [clients, setClients] = useState<ClientProps[]>([]);
+
+  const [client, setClient] = useState<ClientProps>();
+
   const [modalCreateIsOpen, setModalCreateIsOpen] = useState(false);
   const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
 
-  const [userID, setUserID] = useState<number>();
-  const [userName, setUserName] = useState(''); 
-  const [userEmail, setUserEmail] = useState('');
-  const [userCPF, setUserCPF] = useState('');
-  const [userPermission, setUserPermission] = useState('');
-  const [userBirth, setUserBirth] = useState('');
-  const [userPassword, setUserPassword] = useState('');
+  const [clientId, setClientId] = useState<number>();
+  const [clientName, setClientName] = useState(''); 
+  const [clientCPF, setClientCPF] = useState('');
+  const [clientCnh, setClientCnh] = useState('');
+  const [clientBirth, setClientBirth] = useState('');
+  const [clientPhone, setClientPhone] = useState('');
 
   function openModalCreate() {
     setModalCreateIsOpen(true);
@@ -48,224 +49,203 @@ export function Clients() {
 
   function closeModalEdit() {
     setModalEditIsOpen(false);    
-    setUserID(0);
-    setUserName('');
-    setUserEmail('');
-    setUserBirth('');
-    setUserCPF('');
-    setUserPermission('');
-    setUserPassword(''); 
+    setClientId(0);
+    setClientName('');
+    setClientBirth('');
+    setClientCPF('');
+    setClientCnh('');
+    setClientPhone('');
   }
 
-  function getUsers() {
-    api.get("/users").then((response) => setUsers(response.data));
+  function getClients() {
+    api.get("/clients").then((response) => setClients(response.data));
   }
 
   useEffect(() => {
-    getUsers();
+    getClients();
   }, []);
 
-  async function CreateUser(event: React.FormEvent) {
+  async function createClient(event: React.FormEvent) {
     event.preventDefault();
     closeModalCreate();
     
-    if(userName && userEmail && userCPF && userPermission && userPassword && userBirth) {
-      await api.post("/users", {      
-        name: userName, 
-        email: userEmail,
-        cpf: userCPF,
-        birth: userBirth,
-        permission: userPermission,        
-        password: userPassword,      
+    if(clientName && clientCPF && clientBirth && clientCnh && clientPhone) {
+      await api.post("/clients", {      
+        name: clientName,         
+        cpf: clientCPF,
+        birth: clientBirth,
+        cnh: clientCnh,         
+        phone: clientPhone  
       });
     } else {
       alert("Preencha os campos corretamente!");           
     }
 
-    setUserID(0);
-    setUserName('');
-    setUserEmail('');
-    setUserBirth('');
-    setUserCPF('');
-    setUserPermission('');
-    setUserPassword('');  
+    setClientId(0);
+    setClientName('');
+    setClientBirth('');
+    setClientCPF('');
+    setClientCnh('');
+    setClientPhone('');
     
-    getUsers();
+    getClients();
   }
 
-  async function EditUser(event: React.FormEvent) {
+  async function editClient(event: React.FormEvent) {
     event.preventDefault();
     closeModalEdit();
     
-    if(userName && userEmail && userCPF && userPermission && userPassword && userBirth) {
-      await api.patch(`/users/${userID}`, {             
-        name: userName, 
-        email: userEmail,
-        cpf: userCPF,
-        birth: userBirth,
-        permission: userPermission,
-        password: userPassword,      
+    if(clientName && clientCPF && clientBirth && clientCnh && clientPhone) {
+      await api.patch(`/clients/${clientId}`, {             
+        name: clientName,         
+        cpf: clientCPF,
+        birth: clientBirth,
+        cnh: clientCnh,  
+        phone: clientPhone  
       });
     } else {
       alert("Preencha os campos corretamente!");           
     }
 
-    setUserID(0);
-    setUserName('');
-    setUserEmail('');
-    setUserBirth('');
-    setUserCPF('');
-    setUserPermission('');
-    setUserPassword('');  
+    setClientId(0);
+    setClientName('');
+    setClientBirth('');
+    setClientCPF('');
+    setClientCnh('');
     
-    getUsers();
+    getClients();
   }
 
-  async function DeleteUser(id?: number) {
+  async function deleteClient(id?: number) {
     // eslint-disable-next-line no-restricted-globals
-    const confirmation = confirm("Deletar usuário?");  
+    const confirmation = confirm("Deletar cliente?");  
     
     if(confirmation) {    
-      await api.delete(`/users/${id}`);
-      getUsers();
+      await api.delete(`/clients/${id}`);
+      getClients();
     }
   }
 
-  async function HandleEditUser(id?: number) {        
-    await api.get(`/users/${id}`).then((response) => {
-      setUser(response.data);       
+  async function handleEditClient(id?: number) {        
+    await api.get(`/clients/${id}`).then((response) => {
+      setClient(response.data);       
       console.log(response.data);    
     })    
     openModalEdit();
   }
   
   useEffect(() => {
-    if(user) {
-      setUserID(user.id);
-      setUserName(user.name);
-      setUserEmail(user.email);
-      setUserBirth(user.birth);
-      setUserCPF(user.cpf);
-      setUserPermission(user.permission);
-      setUserPassword(user.password);  
+    if(client) {
+      setClientId(client.id);
+      setClientName(client.name);
+      setClientCPF(client.cpf);
+      setClientCnh(client.cnh);
+      setClientBirth(client.birth);      
+      setClientPhone(client.phone);
     }    
-  }, [user]);  
+  }, [client]);  
 
   return (
     <div className={styles.container}>
-      <TitleBar title="Usuários"/>
+      <TitleBar title="Clientes"/>
       <Divider />
 
       <Modal
-        id="createUser"
-        contentLabel="createUser"
+        id="createClient"
+        contentLabel="createClient"
         isOpen={modalCreateIsOpen}        
         onRequestClose={closeModalCreate}   
         ariaHideApp={false}              
       >
-        <h2 style={{ textAlign: 'center' }}>Criar usuário</h2>        
+        <h2 style={{ textAlign: 'center' }}>Adicionar cliente</h2>        
         <div className={styles.modal}>
-          <form onSubmit={(e) => CreateUser(e)}>
+          <form onSubmit={(e) => createClient(e)}>
             <p>Nome:</p>
             <input 
               type="text" 
-              onChange={e => setUserName(e.target.value)}
-            />
-            
-            <p>Email:</p>
-            <input 
-              type="email"
-              onChange={e => setUserEmail(e.target.value)}
-            />
+              onChange={e => setClientName(e.target.value)}
+            />          
 
             <p>CPF:</p>      
             <input 
               type="text"             
-              onChange={e => setUserCPF(e.target.value)}
+              onChange={e => setClientCPF(e.target.value)}
             />          
 
-            <p>Permissão:</p>      
+            <p>CNH:</p>      
             <input 
               type="text"
-              onChange={e => setUserPermission(e.target.value)}
+              onChange={e => setClientCnh(e.target.value)}
             />         
 
             <p>Data de nascimento:</p>
             <input 
               type="date"            
-              onChange={(e) => setUserBirth(e.target.value)} 
+              onChange={(e) => setClientBirth(e.target.value)} 
             />
 
-            <p>Senha:</p>      
+            <p>Celular:</p>      
             <input 
-              type="password"
-              onChange={e => setUserPassword(e.target.value)}
+              type="text"
+              onChange={e => setClientPhone(e.target.value)}
             />                  
 
             <div className={styles.formActionButton}>
               <button onClick={closeModalCreate}>Fechar</button>
-              <button type="submit" onClick={CreateUser}>Criar</button>              
+              <button type="submit" onClick={createClient}>Criar</button>              
             </div>
           </form>
         </div>
       </Modal>
 
       <Modal
-        id="editUser"
-        contentLabel="editUser"
+        id="editClient"
+        contentLabel="editClient"
         isOpen={modalEditIsOpen}        
         onRequestClose={closeModalEdit}                 
         ariaHideApp={false}
       >
-        <h2 style={{ textAlign: 'center' }}>Editar usuário</h2>        
+        <h2 style={{ textAlign: 'center' }}>Editar cliente</h2>        
         <div className={styles.modal}>
-          <form onSubmit={(e) => EditUser(e)}>
-            <p>Nome:</p>
+          <form onSubmit={(e) => editClient(e)}>
+          <p>Nome:</p>
             <input 
               type="text" 
-              value={userName}              
-              onChange={e => setUserName(e.target.value)}
-            />
-            
-            <p>Email:</p>
-            <input 
-              type="email"
-              value={userEmail}
-              onChange={e => setUserEmail(e.target.value)}
-            />
+              value={clientName}
+              onChange={e => setClientName(e.target.value)}
+            />          
 
             <p>CPF:</p>      
             <input 
-              type="text"
-              value={userCPF}
-              onChange={e => setUserCPF(e.target.value)}
+              type="text"    
+              value={clientCPF}         
+              onChange={e => setClientCPF(e.target.value)}
             />          
 
-            <p>Permissão:</p>      
+            <p>CNH:</p>      
             <input 
               type="text"
-              value={userPermission}
-              onChange={e => setUserPermission(e.target.value)}
+              value={clientCnh}
+              onChange={e => setClientCnh(e.target.value)}
             />         
 
             <p>Data de nascimento:</p>
             <input 
-              type="date"    
-              value={userBirth}        
-              onChange={(e) => setUserBirth(e.target.value)} 
+              type="date"            
+              value={clientBirth}
+              onChange={(e) => setClientBirth(e.target.value)} 
             />
 
-            <p>Senha:</p>      
+            <p>Celular:</p>      
             <input 
-              type="password"
-              value={userPassword}
-              disabled
-              onChange={e => setUserPassword(e.target.value)}
-            />                  
+              type="text"
+              value={clientPhone}
+              onChange={e => setClientPhone(e.target.value)}
+            />                        
 
             <div className={styles.formActionButton}>
               <button onClick={closeModalEdit}>Fechar</button>
-              <button type="submit" onClick={EditUser}>Atualizar</button>              
+              <button type="submit" onClick={editClient}>Atualizar</button>              
             </div>
           </form>
         </div>
@@ -273,34 +253,32 @@ export function Clients() {
 
       <div>
         <div className={styles.header}>
-          <button className={styles.addUser} onClick={openModalCreate}>
-            Adicionar usuário
+          <button className={styles.addClients} onClick={openModalCreate}>
+            Adicionar cliente
           </button>
         </div>
-        <table className={styles.users}>
+        <table className={styles.clients}>
           <thead>
             <tr>
               <th>ID</th>
-              <th>Usuário</th>              
-              <th>Email</th>              
+              <th>Cliente</th>              
               <th>CPF</th>              
-              <th>Permissão</th>              
+              <th>Telefone</th>              
             </tr>
           </thead>
           <tbody>
-            {users?.map((user) => {
+            {clients?.map((client) => {
               return (
-                <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>    
-                  <td>{user.email}</td> 
-                  <td>{user.cpf}</td>                  
-                  <td>{user.permission}</td> 
+                <tr key={client.id}>
+                  <td>{client.id}</td>
+                  <td>{client.name}</td>    
+                  <td>{client.cpf}</td> 
+                  <td>{client.phone}</td> 
                   <td style={{ width: '150px' }}>                    
-                    <button className={styles.tableActionButton} onClick={() => HandleEditUser(user.id)}>
+                    <button className={styles.tableActionButton} onClick={() => handleEditClient(client.id)}>
                       <EditIcon />
                     </button>
-                    <button className={styles.tableActionButton} onClick={() => DeleteUser(user.id)}>
+                    <button className={styles.tableActionButton} onClick={() => deleteClient(client.id)}>
                       <Delete />
                     </button>
                   </td>                       
