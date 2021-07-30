@@ -86,16 +86,6 @@ export function Cars() {
   async function CreateCar(event: React.FormEvent) {
     event.preventDefault();
     closeModalCreate();
-
-    console.log(carModel)
-    console.log(carBrand)
-    console.log(carYear)
-      
-    console.log(carDocNumber)
-    console.log(carBrand)
-    console.log(carCategory)    
-
-
     
     if(carModel && carBrand && carYear && carDocNumber && carLicensePlate && carCategory) {
       await api.post("/cars", {      
@@ -178,7 +168,7 @@ export function Cars() {
       setCarDocNumber(car.docNumber);    
       setCarLicensePlate(car.licensePlate);      
     }    
-  }, [car]);  
+  }, [car]);    
 
   return (
     <div className={styles.container}>
@@ -195,7 +185,7 @@ export function Cars() {
         <h2 style={{ textAlign: 'center' }}>Cadastrar carro</h2>        
         <div className={styles.modal}>
           <form onSubmit={(e) => CreateCar(e)}>
-            <p>Modelo:</p>
+            <p>Nome do carro:</p>
             <input 
               type="text" 
               onChange={e => setCarModel(e.target.value)}
@@ -314,7 +304,7 @@ export function Cars() {
       </Modal>
 
       <div>
-        <div className={styles.header}>
+        <div className={styles.header}>          
           <button className={styles.addCar} onClick={openModalCreate}>
             Adicionar carro
           </button>
@@ -323,7 +313,7 @@ export function Cars() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Modelo</th>              
+              <th>Nome do carro</th>              
               <th>Marca</th>                                    
               <th>Categoria</th>                                                                      
               <th>Placa</th>      
