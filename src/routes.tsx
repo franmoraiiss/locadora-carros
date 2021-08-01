@@ -1,16 +1,12 @@
 import { Switch, Route, BrowserRouter, NavLink } from 'react-router-dom';
 
-import { Dashboard } from './pages/Dashboard';
 import { Home } from './pages/Home';
 import { Users } from './pages/Users';
 import { Cars } from './pages/Cars';
 import { Clients } from './pages/Clients';
+import { Rent } from './pages/Rent';
 
 const pages = [
-  {
-    name: 'Dashboard',
-    address: '/dashboard',    
-  },
   {
     name: 'Usuários',
     address: '/users',    
@@ -23,6 +19,10 @@ const pages = [
     name: 'Clientes',
     address: '/clients',    
   },
+  {
+    name: 'Aluguel',
+    address: '/rent'
+  }
 ]
 
 export default function AppRouter() {
@@ -54,10 +54,7 @@ export default function AppRouter() {
           <Switch>            
             <Route exact path="/">
               <Home />
-            </Route>            
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
+            </Route>                        
             <Route path="/users">
               <Users />
             </Route>
@@ -66,6 +63,9 @@ export default function AppRouter() {
             </Route>
             <Route path="/clients">
               <Clients />
+            </Route>
+            <Route path="/rent">
+              <Rent />
             </Route>
           </Switch>
         </Route>

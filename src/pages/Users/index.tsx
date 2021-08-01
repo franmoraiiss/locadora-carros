@@ -10,6 +10,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import api from '../../services/api';
 
 import styles from './styles.module.scss';
+
 interface UserProps {
   id?: number;
   name: string;
@@ -186,14 +187,9 @@ export function Users() {
 
             <p>Permissão:</p>      
             <select 
-              onChange={e => {
-                if(e.target.value.length > 1) {
-                  setUserPermission(e.target.value);
-                } else {
-                  setUserPermission("Administrador");
-                }              
-              }}
+              onChange={e => setUserPermission("Administrador")}
             >
+              <option hidden>Selecione uma opção</option>
               <option>Administrador</option>
               <option>Funcionário</option>
             </select>  

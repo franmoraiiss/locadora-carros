@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
@@ -11,13 +12,14 @@ import api from '../../services/api';
 
 import styles from './styles.module.scss';
 
-interface ClientProps {
+export interface ClientProps {
   id?: number;
   name: string;
   cpf: string;
   cnh: string;  
   birth: string;  
   phone: string;
+  status: "RENTING" | "NOT_RENTING";
 }
 
 export function Clients() {
@@ -34,6 +36,7 @@ export function Clients() {
   const [clientCnh, setClientCnh] = useState('');
   const [clientBirth, setClientBirth] = useState('');
   const [clientPhone, setClientPhone] = useState('');
+  const [clientStatus, setClientStatus] = useState<string>("NOT_RENTING");
 
   function openModalCreate() {
     setModalCreateIsOpen(true);
@@ -55,6 +58,7 @@ export function Clients() {
     setClientCPF('');
     setClientCnh('');
     setClientPhone('');
+    setClientStatus("NOT_RENTING");
   }
 
   function getClients() {
@@ -75,7 +79,8 @@ export function Clients() {
         cpf: clientCPF,
         birth: clientBirth,
         cnh: clientCnh,         
-        phone: clientPhone  
+        phone: clientPhone,        
+        status: clientStatus
       });
     } else {
       alert("Preencha os campos corretamente!");           
@@ -87,6 +92,7 @@ export function Clients() {
     setClientCPF('');
     setClientCnh('');
     setClientPhone('');
+    setClientStatus("NOT_RENTING");
     
     getClients();
   }
@@ -95,13 +101,14 @@ export function Clients() {
     event.preventDefault();
     closeModalEdit();
     
-    if(clientName && clientCPF && clientBirth && clientCnh && clientPhone) {
+    if(clientName && clientCPF && clientBirth && clientCnh && clientPhone && clientStatus) {
       await api.patch(`/clients/${clientId}`, {             
         name: clientName,         
         cpf: clientCPF,
         birth: clientBirth,
         cnh: clientCnh,  
-        phone: clientPhone  
+        phone: clientPhone,
+        status: clientStatus
       });
     } else {
       alert("Preencha os campos corretamente!");           
@@ -112,17 +119,21 @@ export function Clients() {
     setClientBirth('');
     setClientCPF('');
     setClientCnh('');
+    setClientStatus("NOT_RENTING");
     
     getClients();
   }
 
   async function deleteClient(id?: number) {
-    // eslint-disable-next-line no-restricted-globals
-    const confirmation = confirm("Deletar cliente?");  
+    if(clients![id! - 1].status === "RENTING") {
+      alert("Não é possível deletar o cliente pois ele possui um aluguel ativo");
+    } else {
+      const confirmation = confirm("Deletar cliente?");  
     
-    if(confirmation) {    
-      await api.delete(`/clients/${id}`);
-      getClients();
+      if(confirmation) {    
+        await api.delete(`/clients/${id}`);
+        getClients();
+      }
     }
   }
 
@@ -142,6 +153,7 @@ export function Clients() {
       setClientCnh(client.cnh);
       setClientBirth(client.birth);      
       setClientPhone(client.phone);
+      setClientStatus(client.status);
     }    
   }, [client]);  
 
@@ -253,7 +265,7 @@ export function Clients() {
 
       <div>
         <div className={styles.header}>
-          <button className={styles.addClients} onClick={openModalCreate}>
+          <button className={styles.addClient} onClick={openModalCreate}>
             Adicionar cliente
           </button>
         </div>
@@ -264,6 +276,7 @@ export function Clients() {
               <th>Cliente</th>              
               <th>CPF</th>              
               <th>Telefone</th>              
+              <th>Ações</th>              
             </tr>
           </thead>
           <tbody>

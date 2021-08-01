@@ -1,51 +1,37 @@
 {
   "users": [
     {
-      "name": "User 1",
-      "email": "user1@email.com",
-      "cpf": "433.123.324-42",
-      "birth": "2021-07-09",
+      "name": "Francisco",
+      "email": "francisco@gmail.com",
+      "cpf": "999.999.999-99",
+      "birth": "2001-11-30",
       "permission": "Administrador",
-      "password": "asdf123",
+      "password": "admin123",
       "id": 1
-    },
-    {
-      "name": "User 2",
-      "email": "user2@email.com",
-      "cpf": "233.123.322-22",
-      "birth": "2021-07-07",
-      "permission": "Funcionário",
-      "password": "asdf123",
-      "id": 2
     }
   ],
   "cars": [
     {
-      "name": "Novo Astra",
-      "brand": "Chevrolet",
-      "year": "2000",
-      "docNumber": "34289473298431",
-      "licensePlate": "JOE-2323",
-      "category": "Sedan",
+      "name": "UNO",
+      "brand": "FIAT",
+      "year": "2008",
+      "docNumber": "12345678",
+      "licensePlate": "G3X-9999",
+      "category": "Hatch",
+      "status": "NOT_RENTING",
+      "timesRented": 1,
       "id": 1
     },
     {
-      "name": "Ecosport",
-      "brand": "Ford",
-      "year": "2005",
-      "docNumber": "23414738272",
-      "licensePlate": "ECO-2332",
-      "category": "Esportivo",
+      "name": "FUSCA",
+      "brand": "VW",
+      "year": "1970",
+      "docNumber": "987654321",
+      "licensePlate": "GEX-9500",
+      "category": "Hatch",
+      "status": "NOT_RENTING",
+      "timesRented": 0,
       "id": 2
-    },
-    {
-      "name": "Palio",
-      "brand": "Fiat",
-      "year": "2003",
-      "docNumber": "1343245543562",
-      "licensePlate": "ZZZ-1234",
-      "category": "Sedex",
-      "id": 3
     }
   ],
   "car-category": [
@@ -76,20 +62,68 @@
   ],
   "clients": [
     {
-      "id": 1,
-      "name": "Francisco",
-      "cpf": "233.123.322-22",
-      "cnh": "2324324329898",
-      "birth": "2021-07-07",
-      "phone": "3539329432"
+      "name": "FRANCISCO",
+      "cpf": "123456789",
+      "birth": "2021-07-09",
+      "cnh": "987654321",
+      "phone": "9999999999",
+      "status": "NOT_RENTING",
+      "id": 1
     },
     {
-      "name": "Cristian Novo",
-      "cpf": "34893452352489",
-      "birth": "2021-07-23",
-      "cnh": "243237482",
-      "phone": "3599146464646",
+      "name": "CRISTIAN",
+      "cpf": "09876543212",
+      "birth": "2021-07-12",
+      "cnh": "123456789",
+      "phone": "999999999923",
+      "status": "NOT_RENTING",
       "id": 2
+    },
+    {
+      "name": "CAMILA",
+      "cpf": "1235465432",
+      "birth": "2021-07-15",
+      "cnh": "12342346543",
+      "phone": "99999999321",
+      "status": "NOT_RENTING",
+      "id": 3
+    }
+  ],
+  "rents": [
+    {
+      "car": "UNO",
+      "client": "FRANCISCO",
+      "price": "123",
+      "startDate": "2021-07-21",
+      "endDate": "2021-07-19",
+      "clientId": 1,
+      "carId": 1,
+      "status": "FINISH",
+      "id": 1
+    }
+  ],
+  "cash": [
+    {
+      "id": 1,
+      "total": 123,
+      "rents": 1
+    }
+  ],
+  "car-deleted": [
+    {
+      "car": {
+        "name": "CORCEL",
+        "brand": "FORD",
+        "year": "1985",
+        "docNumber": "654321234",
+        "licensePlate": "GYZ-1234",
+        "category": "Sedan",
+        "status": "NOT_RENTING",
+        "timesRented": 0,
+        "id": 3
+      },
+      "reason": "Vendido",
+      "id": 1
     }
   ]
 }
