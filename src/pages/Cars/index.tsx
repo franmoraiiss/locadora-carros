@@ -20,7 +20,7 @@ export interface CarProps {
   category: string;
   docNumber: string;
   licensePlate: string;
-  timesRented?: number;
+  timesRented: number;
   status: "RENTING" | "NOT_RENTING";
 }
 

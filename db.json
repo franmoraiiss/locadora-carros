@@ -19,7 +19,7 @@
       "licensePlate": "G3X-9999",
       "category": "Hatch",
       "status": "NOT_RENTING",
-      "timesRented": 1,
+      "timesRented": 2,
       "id": 1
     },
     {
@@ -30,7 +30,7 @@
       "licensePlate": "GEX-9500",
       "category": "Hatch",
       "status": "NOT_RENTING",
-      "timesRented": 0,
+      "timesRented": 8,
       "id": 2
     }
   ],
@@ -106,7 +106,7 @@
     {
       "id": 1,
       "total": 123,
-      "rents": 1
+      "rents": 10
     }
   ],
   "car-deleted": [
