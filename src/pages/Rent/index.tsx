@@ -265,11 +265,11 @@ export function Rent() {
 
       <div>
         <div className={styles.header}>
-          <button className={styles.addClient} onClick={openModalCreate}>
+          <button className={styles.addRent} onClick={openModalCreate}>
             Adicionar aluguel
           </button>
         </div>
-        <table className={styles.clients}>
+        <table className={styles.rents}>
           <thead>
             <tr>
               <th>ID</th>

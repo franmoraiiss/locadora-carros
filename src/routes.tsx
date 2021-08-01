@@ -5,6 +5,7 @@ import { Users } from './pages/Users';
 import { Cars } from './pages/Cars';
 import { Clients } from './pages/Clients';
 import { Rent } from './pages/Rent';
+import { Reports } from './pages/Reports';
 
 const pages = [
   {
@@ -22,6 +23,10 @@ const pages = [
   {
     name: 'Aluguel',
     address: '/rent'
+  },
+  {
+    name: 'Relatórios',
+    address: '/reports'
   }
 ]
 
@@ -66,6 +71,9 @@ export default function AppRouter() {
             </Route>
             <Route path="/rent">
               <Rent />
+            </Route>
+            <Route path="/reports">
+              <Reports />
             </Route>
           </Switch>
         </Route>
