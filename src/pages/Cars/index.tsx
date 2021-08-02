@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
@@ -11,17 +12,16 @@ import api from '../../services/api';
 
 import styles from './styles.module.scss';
 
-interface CarProps {
+export interface CarProps {
   id?: number;
   name: string;
   brand: string;
-
   year: string;
-  docNumber: string;
-  chassi: string;
-  licensePlate: string;
   category: string;
-  client: string;
+  docNumber: string;
+  licensePlate: string;
+  timesRented: number;
+  status: "RENTING" | "NOT_RENTING";
 }
 
 interface CategoryProps {
@@ -41,8 +41,9 @@ export function Cars() {
   const [carYear, setCarYear] = useState('');   
   const [carDocNumber, setCarDocNumber] = useState('');   
   const [carLicensePlate, setCarLicensePlate] = useState('');   
-  const [carCategory, setCarCategory] = useState("Sedan");     
+  const [carCategory, setCarCategory] = useState('');     
   const [carBrand, setCarBrand] = useState('');   
+  const [carStatus, setCarStatus] = useState<string>("NOT_RENTING");
 
   const [carCategorys, setCarCategorys] = useState<CategoryProps[]>([]);
 
@@ -65,9 +66,10 @@ export function Cars() {
     setCarModel('');
     setCarBrand('');
     setCarYear('');  
-    setCarCategory("Sedan");
+    setCarCategory('');
     setCarDocNumber('');    
-    setCarLicensePlate('');    
+    setCarLicensePlate('');   
+    setCarStatus("NOT_RENTING");
   }
 
   async function getCars() {
@@ -86,16 +88,6 @@ export function Cars() {
   async function CreateCar(event: React.FormEvent) {
     event.preventDefault();
     closeModalCreate();
-
-    console.log(carModel)
-    console.log(carBrand)
-    console.log(carYear)
-      
-    console.log(carDocNumber)
-    console.log(carBrand)
-    console.log(carCategory)    
-
-
     
     if(carModel && carBrand && carYear && carDocNumber && carLicensePlate && carCategory) {
       await api.post("/cars", {      
@@ -105,6 +97,8 @@ export function Cars() {
         docNumber: carDocNumber,
         licensePlate: carLicensePlate,
         category: carCategory,
+        status: carStatus,
+        timesRented: 0,
       });
     } else {
       alert("Preencha os campos corretamente!");           
@@ -114,9 +108,10 @@ export function Cars() {
     setCarModel('');
     setCarBrand('');
     setCarYear('');  
-    setCarCategory("Sedan");
+    setCarCategory('');
     setCarDocNumber('');    
-    setCarLicensePlate('');    
+    setCarLicensePlate('');
+    setCarStatus("NOT_RENTING");   
     
     getCars();
   }
@@ -125,14 +120,15 @@ export function Cars() {
     event.preventDefault();
     closeModalEdit();
     
-    if(carModel && carBrand && carYear && carDocNumber && carLicensePlate && carCategory) {
-      await api.put(`/cars/${carID}`, {             
+    if(carModel && carBrand && carYear && carDocNumber && carLicensePlate && carCategory && carStatus) {
+      await api.patch(`/cars/${carID}`, {             
         name: carModel,
         brand: carBrand,
         year: carYear,
         docNumber: carDocNumber,
         licensePlate: carLicensePlate,
-        category: carCategory,
+        category: carCategory,    
+        status: carStatus    
       });
     } else {
       alert("Preencha os campos corretamente!");           
@@ -142,43 +138,59 @@ export function Cars() {
     setCarModel('');
     setCarBrand('');
     setCarYear('');  
-    setCarCategory("Sedan");
+    setCarCategory('');
     setCarDocNumber('');    
-    setCarLicensePlate('');    
+    setCarLicensePlate(''); 
+    setCarStatus("NOT_RENTING");   
     
     getCars();
   }
 
   async function DeleteCar(id?: number) {
-    // eslint-disable-next-line no-restricted-globals
-    const confirmation = confirm("Deletar carro?");  
+    if(cars![id! - 1].status === "RENTING") {
+      alert("Não é possível deletar o carro pois existe um aluguel ativo com este carro");
+    } else {
+      const confirmation = confirm("Deletar carro?");  
     
-    if(confirmation) {    
-      await api.delete(`/cars/${id}`);
-      getCars();
+      if(confirmation) {  
+        const reason = prompt("Qual a razão da exclusão do carro?");
+
+        const car = await api.get(`/cars/${id}`);
+
+        await api.post('/car-deleted/', {
+          car: car.data,
+          reason: reason
+        });
+        
+        await api.delete(`/cars/${id}`);
+        getCars();
+      }
     }
   }
 
-  async function HandleEditCar(id?: number) {        
-    await api.get(`/cars/${id}`).then((response) => {
-      setCar(response.data);       
-      console.log(response.data);    
-    })    
-    openModalEdit();
+  async function HandleEditCar(id?: number) {       
+    if(cars![id! - 1].status === "RENTING") {
+      alert("Não é possível editar o carro pois existe um aluguel ativo com este carro");
+    } else { 
+      await api.get(`/cars/${id}`).then((response) => {
+        setCar(response.data);               
+      })    
+      openModalEdit();
+    }
   }
-  
+
   useEffect(() => {
     if(car) { 
       setCarID(car.id);
       setCarModel(car.name);
       setCarBrand(car.brand);
-
       setCarYear(car.year);  
       setCarCategory(car.category);
       setCarDocNumber(car.docNumber);    
       setCarLicensePlate(car.licensePlate);      
+      setCarStatus(car.status);
     }    
-  }, [car]);  
+  }, [car]);    
 
   return (
     <div className={styles.container}>
@@ -195,7 +207,7 @@ export function Cars() {
         <h2 style={{ textAlign: 'center' }}>Cadastrar carro</h2>        
         <div className={styles.modal}>
           <form onSubmit={(e) => CreateCar(e)}>
-            <p>Modelo:</p>
+            <p>Nome do carro:</p>
             <input 
               type="text" 
               onChange={e => setCarModel(e.target.value)}
@@ -203,7 +215,7 @@ export function Cars() {
             
             <p>Marca:</p>
             <input 
-              type="email"
+              type="text"
               onChange={e => setCarBrand(e.target.value)}
             />
             
@@ -215,14 +227,9 @@ export function Cars() {
 
             <p>Categoria:</p>
             <select 
-              onChange={e => {
-                if(e.target.value.length > 1) {
-                  setCarCategory(e.target.value);
-                } else {
-                  setCarCategory("Sedan");
-                }              
-              }}
+              onChange={e => setCarCategory(e.target.value)}              
             >
+              <option hidden>Selecione uma opção</option>
               {carCategorys.map((category, index) => {                
                 return (
                   <option key={index}>{category.name}</option>
@@ -267,9 +274,9 @@ export function Cars() {
               onChange={e => setCarModel(e.target.value)}
             />
             
-            <p>Email:</p>
+            <p>Marca:</p>
             <input 
-              type="email"
+              type="text"
               value={carBrand}
               onChange={e => setCarBrand(e.target.value)}
             />
@@ -314,7 +321,7 @@ export function Cars() {
       </Modal>
 
       <div>
-        <div className={styles.header}>
+        <div className={styles.header}>          
           <button className={styles.addCar} onClick={openModalCreate}>
             Adicionar carro
           </button>
@@ -323,10 +330,11 @@ export function Cars() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Modelo</th>              
+              <th>Nome do carro</th>              
               <th>Marca</th>                                    
               <th>Categoria</th>                                                                      
               <th>Placa</th>      
+              <th>Status</th>      
               <th>Ações</th>                              
             </tr>
           </thead>
@@ -339,6 +347,7 @@ export function Cars() {
                   <td>{car.brand}</td>    
                   <td>{car.category}</td>    
                   <td>{car.licensePlate}</td>    
+                  <td>{car.status === 'RENTING' ? 'ALUGANDO' : 'DISPONÍVEL'}</td>    
                   <td style={{ width: '150px' }}>                     
                     <button className={styles.tableActionButton} onClick={() => HandleEditCar(car.id)}>
                       <EditIcon />

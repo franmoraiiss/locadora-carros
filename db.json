@@ -1,53 +1,6 @@
 {
-  "users": [
-    {
-      "name": "User 1",
-      "email": "user1@email.com",
-      "cpf": "433.123.324-42",
-      "birth": "2021-07-09",
-      "permission": "Administrador",
-      "password": "asdf123",
-      "id": 1
-    },
-    {
-      "name": "User 2",
-      "email": "user2@email.com",
-      "cpf": "233.123.322-22",
-      "birth": "2021-07-07",
-      "permission": "Funcionário",
-      "password": "asdf123",
-      "id": 2
-    }
-  ],
-  "cars": [
-    {
-      "name": "Novo Astra",
-      "brand": "Chevrolet",
-      "year": "2000",
-      "docNumber": "34289473298431",
-      "licensePlate": "JOE-2323",
-      "category": "Sedan",
-      "id": 1
-    },
-    {
-      "name": "Ecosport",
-      "brand": "Ford",
-      "year": "2005",
-      "docNumber": "23414738272",
-      "licensePlate": "ECO-2332",
-      "category": "Esportivo",
-      "id": 2
-    },
-    {
-      "name": "Palio",
-      "brand": "Fiat",
-      "year": "2003",
-      "docNumber": "1343245543562",
-      "licensePlate": "ZZZ-1234",
-      "category": "Sedex",
-      "id": 3
-    }
-  ],
+  "users": [],
+  "cars": [],
   "car-category": [
     {
       "id": 1,
@@ -55,11 +8,33 @@
     },
     {
       "id": 2,
-      "name": "Sedex"
+      "name": "SUV"
     },
     {
       "id": 3,
+      "name": "Hatch"
+    },
+    {
+      "id": 4,
+      "name": "Picape"
+    },
+    {
+      "id": 5,
+      "name": "Minivan"
+    },
+    {
+      "id": 6,
       "name": "Sport"
     }
-  ]
+  ],
+  "clients": [],
+  "rents": [],
+  "cash": [
+    {
+      "id": 1,
+      "total": 0,
+      "rents": 0
+    }
+  ],
+  "car-deleted": []
 }
