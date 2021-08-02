@@ -179,7 +179,7 @@ export function Cars() {
       openModalEdit();
     }
   }
-  
+
   useEffect(() => {
     if(car) { 
       setCarID(car.id);
@@ -216,7 +216,7 @@ export function Cars() {
             
             <p>Marca:</p>
             <input 
-              type="email"
+              type="text"
               onChange={e => setCarBrand(e.target.value)}
             />
             
@@ -275,9 +275,9 @@ export function Cars() {
               onChange={e => setCarModel(e.target.value)}
             />
             
-            <p>Email:</p>
+            <p>Marca:</p>
             <input 
-              type="email"
+              type="text"
               value={carBrand}
               onChange={e => setCarBrand(e.target.value)}
             />
@@ -335,6 +335,7 @@ export function Cars() {
               <th>Marca</th>                                    
               <th>Categoria</th>                                                                      
               <th>Placa</th>      
+              <th>Status</th>      
               <th>Ações</th>                              
             </tr>
           </thead>
@@ -347,6 +348,7 @@ export function Cars() {
                   <td>{car.brand}</td>    
                   <td>{car.category}</td>    
                   <td>{car.licensePlate}</td>    
+                  <td>{car.status === 'RENTING' ? 'ALUGANDO' : 'DISPONÍVEL'}</td>    
                   <td style={{ width: '150px' }}>                     
                     <button className={styles.tableActionButton} onClick={() => HandleEditCar(car.id)}>
                       <EditIcon />

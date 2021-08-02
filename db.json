@@ -1,39 +1,6 @@
 {
-  "users": [
-    {
-      "name": "Francisco",
-      "email": "francisco@gmail.com",
-      "cpf": "999.999.999-99",
-      "birth": "2001-11-30",
-      "permission": "Administrador",
-      "password": "admin123",
-      "id": 1
-    }
-  ],
-  "cars": [
-    {
-      "name": "UNO",
-      "brand": "FIAT",
-      "year": "2008",
-      "docNumber": "12345678",
-      "licensePlate": "G3X-9999",
-      "category": "Hatch",
-      "status": "NOT_RENTING",
-      "timesRented": 2,
-      "id": 1
-    },
-    {
-      "name": "FUSCA",
-      "brand": "VW",
-      "year": "1970",
-      "docNumber": "987654321",
-      "licensePlate": "GEX-9500",
-      "category": "Hatch",
-      "status": "NOT_RENTING",
-      "timesRented": 8,
-      "id": 2
-    }
-  ],
+  "users": [],
+  "cars": [],
   "car-category": [
     {
       "id": 1,
@@ -60,70 +27,14 @@
       "name": "Sport"
     }
   ],
-  "clients": [
-    {
-      "name": "FRANCISCO",
-      "cpf": "123456789",
-      "birth": "2021-07-09",
-      "cnh": "987654321",
-      "phone": "9999999999",
-      "status": "NOT_RENTING",
-      "id": 1
-    },
-    {
-      "name": "CRISTIAN",
-      "cpf": "09876543212",
-      "birth": "2021-07-12",
-      "cnh": "123456789",
-      "phone": "999999999923",
-      "status": "NOT_RENTING",
-      "id": 2
-    },
-    {
-      "name": "CAMILA",
-      "cpf": "1235465432",
-      "birth": "2021-07-15",
-      "cnh": "12342346543",
-      "phone": "99999999321",
-      "status": "NOT_RENTING",
-      "id": 3
-    }
-  ],
-  "rents": [
-    {
-      "car": "UNO",
-      "client": "FRANCISCO",
-      "price": "123",
-      "startDate": "2021-07-21",
-      "endDate": "2021-07-19",
-      "clientId": 1,
-      "carId": 1,
-      "status": "FINISH",
-      "id": 1
-    }
-  ],
+  "clients": [],
+  "rents": [],
   "cash": [
     {
       "id": 1,
-      "total": 123,
-      "rents": 10
+      "total": 0,
+      "rents": 0
     }
   ],
-  "car-deleted": [
-    {
-      "car": {
-        "name": "CORCEL",
-        "brand": "FORD",
-        "year": "1985",
-        "docNumber": "654321234",
-        "licensePlate": "GYZ-1234",
-        "category": "Sedan",
-        "status": "NOT_RENTING",
-        "timesRented": 0,
-        "id": 3
-      },
-      "reason": "Vendido",
-      "id": 1
-    }
-  ]
+  "car-deleted": []
 }

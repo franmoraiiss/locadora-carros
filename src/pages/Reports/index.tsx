@@ -33,7 +33,7 @@ export function Reports() {
   function getPriceMd() {
     if(totalRent) {
       const priceMd = totalRent.total / totalRent.rents;
-      return priceMd;
+      return priceMd.toFixed(2);
     } else {
       return 'Loading';
     }
@@ -42,7 +42,7 @@ export function Reports() {
   function getCarPercentByTotalRent(timesRented: number) {
     if(totalRent) {
       const percent = timesRented / totalRent.rents ;
-      return (percent * 100).toFixed(1);
+      return (percent * 100).toFixed(2);
     } else {
       return "Loading";
     }

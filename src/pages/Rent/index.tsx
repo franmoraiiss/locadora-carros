@@ -8,8 +8,8 @@ import { ClientProps } from '../Clients';
 import { Divider } from '../../components/Divider';
 import { TitleBar } from '../../components/TitleBar';
 
-import Delete from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
+import CancelIcon from '@material-ui/icons/HighlightOff';
+import DoneIcon from '@material-ui/icons/Done';
 
 import api from '../../services/api';
 
@@ -283,7 +283,7 @@ export function Rent() {
             </tr>
           </thead>
           <tbody>
-            {rents?.map((rent) => {
+            {rents?.sort((a, b) => Number(b.id) - Number(a.id)).map((rent) => {
               return (
                 <tr key={rent.id}>
                   <td>{rent.id}</td>
@@ -292,17 +292,17 @@ export function Rent() {
                   <td>{rent.startDate}</td> 
                   <td>{rent.endDate}</td> 
                   <td>{rent.price}</td> 
-                  <td>{rent.status}</td> 
+                  <td>{rent.status === 'ACTIVE' ? 'ATIVO' : 'FINALIZADO'}</td> 
                   <td style={{ width: '150px' }}>                    
                     <button 
                       className={styles.tableActionButton} 
                       onClick={() => finishRent(rent.id)}
                       disabled={rent.status !== "ACTIVE"}                   
                     >
-                      <EditIcon />
+                      <DoneIcon />
                     </button>
                     <button className={styles.tableActionButton} onClick={() => deleteRent(rent.id)}>
-                      <Delete />
+                      <CancelIcon />
                     </button>
                   </td>                       
                 </tr>

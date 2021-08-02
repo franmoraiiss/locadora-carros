@@ -187,7 +187,7 @@ export function Users() {
 
             <p>Permissão:</p>      
             <select 
-              onChange={e => setUserPermission("Administrador")}
+              onChange={e => setUserPermission(e.target.value)}
             >
               <option hidden>Selecione uma opção</option>
               <option>Administrador</option>
@@ -248,13 +248,7 @@ export function Users() {
             <p>Permissão:</p>      
             <select 
               value={userPermission}
-              onChange={e => {
-                if(e.target.value.length > 1) {
-                  setUserPermission(e.target.value);
-                } else {
-                  setUserPermission("Administrador");
-                }              
-              }}
+              onChange={(e) => setUserPermission(e.target.value)}
             >
               <option>Administrador</option>
               <option>Funcionário</option>
