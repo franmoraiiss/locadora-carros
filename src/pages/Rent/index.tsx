@@ -291,7 +291,7 @@ export function Rent() {
                   <td>{rent.car}</td> 
                   <td>{rent.startDate}</td> 
                   <td>{rent.endDate}</td> 
-                  <td>{rent.price}</td> 
+                  <td>R${rent.price},00</td> 
                   <td>{rent.status === 'ACTIVE' ? 'ATIVO' : 'FINALIZADO'}</td> 
                   <td style={{ width: '150px' }}>                    
                     <button 

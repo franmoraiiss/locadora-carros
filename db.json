@@ -1,6 +1,59 @@
 {
-  "users": [],
-  "cars": [],
+  "users": [
+    {
+      "name": "Francisco Morais",
+      "email": "francisco@localiza.com.br",
+      "cpf": "123.456.789-99",
+      "birth": "2021-08-03",
+      "permission": "Administrador",
+      "password": "asdf123",
+      "id": 1
+    },
+    {
+      "name": "Camila Braga",
+      "email": "camila@localiza.com.br",
+      "cpf": "321.123.456-78",
+      "birth": "2021-08-21",
+      "permission": "Administrador",
+      "password": "asdf1233",
+      "id": 2
+    }
+  ],
+  "cars": [
+    {
+      "name": "Civic",
+      "brand": "Honda",
+      "year": "2018",
+      "docNumber": "12345678900",
+      "licensePlate": "G3X-9999",
+      "category": "Sedan",
+      "status": "NOT_RENTING",
+      "timesRented": 1,
+      "id": 1
+    },
+    {
+      "name": "UP Tsi",
+      "brand": "Volkswagen",
+      "year": "2017",
+      "docNumber": "98765432100",
+      "licensePlate": "GUE-1111",
+      "category": "Hatch",
+      "status": "RENTING",
+      "timesRented": 1,
+      "id": 2
+    },
+    {
+      "name": "458 Italy",
+      "brand": "Ferrari",
+      "year": "2015",
+      "docNumber": "543214366578",
+      "licensePlate": "UAE-9999",
+      "category": "Sport",
+      "status": "RENTING",
+      "timesRented": 1,
+      "id": 3
+    }
+  ],
   "car-category": [
     {
       "id": 1,
@@ -27,13 +80,75 @@
       "name": "Sport"
     }
   ],
-  "clients": [],
-  "rents": [],
+  "clients": [
+    {
+      "name": "Cristian Stoenica",
+      "cpf": "987.654.321-00",
+      "birth": "2021-08-19",
+      "cnh": "123423456543",
+      "phone": "03540028922",
+      "status": "RENTING",
+      "id": 1
+    },
+    {
+      "name": "João Vitor Araújo",
+      "cpf": "123.432.321-34",
+      "birth": "2021-08-27",
+      "cnh": "123354375644",
+      "phone": "03520180002",
+      "status": "NOT_RENTING",
+      "id": 2
+    },
+    {
+      "name": "Thalles de Mileto",
+      "cpf": "983.235.153-34",
+      "birth": "2021-08-12",
+      "cnh": "1242534365433",
+      "phone": "03592320034",
+      "status": "RENTING",
+      "id": 3
+    }
+  ],
+  "rents": [
+    {
+      "car": "Civic",
+      "client": "João Vitor Araújo",
+      "price": "250",
+      "startDate": "2021-08-15",
+      "endDate": "2021-08-23",
+      "clientId": 2,
+      "carId": 1,
+      "status": "FINISH",
+      "id": 1
+    },
+    {
+      "car": "UP Tsi",
+      "client": "Cristian Stoenica",
+      "price": "199",
+      "startDate": "2021-08-09",
+      "endDate": "2021-08-18",
+      "clientId": 1,
+      "carId": 2,
+      "status": "ACTIVE",
+      "id": 2
+    },
+    {
+      "car": "458 Italy",
+      "client": "Thalles de Mileto",
+      "price": "200",
+      "startDate": "2021-08-09",
+      "endDate": "2021-08-12",
+      "clientId": 3,
+      "carId": 3,
+      "status": "ACTIVE",
+      "id": 3
+    }
+  ],
   "cash": [
     {
       "id": 1,
-      "total": 0,
-      "rents": 0
+      "total": 649,
+      "rents": 3
     }
   ],
   "car-deleted": []
