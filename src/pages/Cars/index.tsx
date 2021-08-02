@@ -173,8 +173,7 @@ export function Cars() {
       alert("Não é possível editar o carro pois existe um aluguel ativo com este carro");
     } else { 
       await api.get(`/cars/${id}`).then((response) => {
-        setCar(response.data);       
-        console.log(response.data);    
+        setCar(response.data);               
       })    
       openModalEdit();
     }

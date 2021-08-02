@@ -139,8 +139,7 @@ export function Clients() {
 
   async function handleEditClient(id?: number) {        
     await api.get(`/clients/${id}`).then((response) => {
-      setClient(response.data);       
-      console.log(response.data);    
+      setClient(response.data);             
     })    
     openModalEdit();
   }
