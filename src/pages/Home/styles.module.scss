@@ -1,0 +1,13 @@
+.container {
+  height: 100vh;
+  margin: 2rem;
+
+  p {
+    margin-top: 1rem;
+
+    &:last-child {
+      font-size: 12px;
+      opacity: 0.5;
+    }
+  }
+}
