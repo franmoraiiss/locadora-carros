@@ -2,7 +2,8 @@
 
 ## Introduction
 
-> O projeto é um sistema completo para realizar o gerenciamento de processos internos de uma locadora de carros.
+> O projeto é um sistema completo para realizar o gerenciamento de processos internos de uma locadora de carros. 
+> Projeto da matéria de Engenharia de Software - UNIFEI
 
 ## Installation
 
